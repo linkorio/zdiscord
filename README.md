@@ -15,4 +15,14 @@ git clone git@github.com:linkorio/zdiscord.git
 
 <h2> Shortcut </h2>
 <p> To create a shortcut on your desktop, run the create_link.cmd file</p>
-<p> <span style='color:red'>!!!</span> If you want zapret to close when Discord stops, you need to add "run as administrator" to the shortcut. </p>
+<p>!!! If you want zapret to close when Discord stops, you need to add "run as administrator" to the shortcut. </p>
+<p>* If you close main terminal, zapret will not be closed.</p>
+<p>* And if you close zapret, discord will not be closed.</p>
+<p>* It is assumed that you will close discord via the system tray.</p>
+<p> You can copy and remove original shortcut </p>
+
+<h2> Files description </h2>
+<p> create_link.cmd - cmd file to run link.ps1 without console  </p>
+<p> link.ps1 - powershell script to create shortcut from run_both.ps1 </p>
+<p> run_both.ps1 - main powershell script to download to home directory and run zapret-discord-youtube and run discord </p>
+<p> README - documents and description for project</p>
