@@ -26,3 +26,8 @@ git clone git@github.com:linkorio/zdiscord.git
 <p> link.ps1 - powershell script to create shortcut from run_both.ps1 </p>
 <p> run_both.ps1 - main powershell script to download to home directory and run zapret-discord-youtube and run discord </p>
 <p> README - documents and description for project</p>
+
+<h2> TODO List </h2>
+<p> 1. Swap git clone on download zip  </p>
+<p> 2. Add git pull or update manager for zapret  </p>
+<p> 3. Add planner for autostart with windows </p>
