@@ -1,7 +1,7 @@
 $scriptPath = "$PSScriptRoot\run_both.ps1"
 
 if (-not (Test-Path $scriptPath)) {
-    Write-Host "File $scriptPath foes does not exist!" -ForegroundColor Red
+    Write-Host "File $scriptPath does not exist!" -ForegroundColor Red
     pause
     exit
 }
@@ -17,4 +17,4 @@ $shortcut.IconLocation = "powershell.exe"
 $shortcut.IconLocation = "$HOME\AppData\Local\Discord\app.ico"
 $shortcut.Save()
 
-Write-Host "Link created on desktop!" -ForegroundColor Green
+Write-Host "Shortcut created on desktop!" -ForegroundColor Green

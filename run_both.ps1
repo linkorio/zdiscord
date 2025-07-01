@@ -5,30 +5,42 @@ $zapretDir = "$HOME\zapret-discord-youtube"
 $repoUrl = "https://github.com/Flowseal/zapret-discord-youtube.git"
 $batFilePath = "$zapretDir\general (ALT).bat"
 
-# 
 function Download-Repo {
     Write-Host "Download from GitHub..."
-    
-    cd $HOME
+
     git clone $repoUrl $zapretDir
     
     if ($LASTEXITCODE -ne 0) {
-        Write-Host "Error clone repository." -ForegroundColor Red
+        Write-Host "Error cloning repository" -ForegroundColor Red
         Start-Sleep -Seconds 5
         exit 1
     }
 
-    Write-Host "Repository successed download."
+    Write-Host "Repository has been downloaded successfully" -ForegroundColor Green
 }
 
-# Проверяем наличие папки
+function Update-Repo {
+    Write-Host "Update from GitHub..."
+    
+    cd $zapretDir
+    git pull
+    
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "Error pulling repository" -ForegroundColor Red
+        Start-Sleep -Seconds 500
+        exit 1
+    }
+
+    Write-Host "Repository has been updated successfully" -ForegroundColor Green
+}
+
 if (-not (Test-Path $zapretDir)) {
     Write-Host "Project not found"
     Download-Repo
 } else {
-    Write-Host "zapret-discord-youtube already exists."
+    Write-Host "zapret-discord-youtube already exists"
+    Update-Repo
 }
-
 
 Write-Host "Start general.bat..."
 $processBat = Start-Process cmd.exe -ArgumentList "/c `"$batFilePath`"" -Verb RunAs -PassThru
@@ -36,7 +48,7 @@ $batPid = $processBat.Id
 Write-Host "ID process .bat: $batPid"
 
 Start-Sleep -Seconds 2
-# Check childrens process
+
 $children = Get-WmiObject Win32_Process | Where-Object { $_.ParentProcessId -eq $processBat.Id }
 
 if ($children) {
