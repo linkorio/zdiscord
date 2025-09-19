@@ -3,7 +3,7 @@
 # Settings
 $zapretDir = "$HOME\zapret-discord-youtube"
 $repoUrl = "https://github.com/Flowseal/zapret-discord-youtube.git"
-$batFilePath = "$zapretDir\general (ALT).bat"
+$batFilePath = "$zapretDir\general (ALT3).bat"
 
 function Download-Repo {
     Write-Host "Download from GitHub..."
@@ -19,11 +19,22 @@ function Download-Repo {
     Write-Host "Repository has been downloaded successfully" -ForegroundColor Green
 }
 
+function Copy-Repo {
+    Write-Host "Copy from this repo to home dir..."
+    cp ./zapret-discord-youtube $zapretDir
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "Error copy dir" -ForegroundColor Red
+        Start-Sleep -Seconds 5
+        exit 1
+    }
+    Write-Host "Repository has been copy successfully" -ForegroundColor Green
+}
+
 function Update-Repo {
     Write-Host "Update from GitHub..."
     
     cd $zapretDir
-    git pull
+    git pull -f
     
     if ($LASTEXITCODE -ne 0) {
         Write-Host "Error pulling repository" -ForegroundColor Red
@@ -36,11 +47,12 @@ function Update-Repo {
 
 if (-not (Test-Path $zapretDir)) {
     Write-Host "Project not found"
-    Download-Repo
-} else {
-    Write-Host "zapret-discord-youtube already exists"
-    Update-Repo
+    Copy-Repo
 }
+# } else {
+#     Write-Host "zapret-discord-youtube already exists"
+#     Update-Repo
+# }
 
 Write-Host "Start general.bat..."
 $processBat = Start-Process cmd.exe -ArgumentList "/c `"$batFilePath`"" -Verb RunAs -PassThru
